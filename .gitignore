@@ -1,0 +1,27 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!*.R
+!*.Rmd
+!template.latex
+!*.py
+!*.ipynb
+!*.md
+!*.sh
+!literature/*/*.pdf
+!requirements.txt
+!src/**/*
+!pages/**/*
+!*.rst
+!docs/**/*.rst
+
+# ...even if they are in subdirectories
+!*/
+notebooks/**/* 
+venv*
+env*
+build*
+legacy*
+**/__pycache__
