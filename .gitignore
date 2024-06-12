@@ -21,7 +21,14 @@
 !*/
 notebooks/**/* 
 venv*
+cenv*
+.venv*
+.cenv*
+.env*
 env*
 build*
 legacy*
 **/__pycache__
+
+!Dockerfile
+!.dockerignore

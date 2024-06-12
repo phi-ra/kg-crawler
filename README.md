@@ -1,9 +1,17 @@
 # ASTRA scraper
 
-Contains a simple scraper for the ASTRA webpage. Basically just grabs everything it can find on the webpage itself and on linked feldex data fields 
+Contains a simple scraper for the FEDRO webpage. With a few tweaks, you should be able to run it on most webpages of federal departements. Basically just grabs everything it can find on the webpage itself and on linked feldex data fields. 
 
 ## How to use it
 
+### Using a Docker container (for a full copy) of fedro data
+To do this for the fedro webpage, copy the repo and run the follwoing commands in the directory:
+```
+docker build -t name_of_your_image .
+docker run --rm -it -v $(pwd)/path_to_your_folder:/crawler/crawled_data name_of_your_image
+```
+
+### Using it directly
 Set up your virtual environment and run
 
 ```
