@@ -21,5 +21,5 @@ if __name__ == "__main__":
     scraper_fedlex._scrap_feldex(write_dir='./crawled_data/fedlex', 
                                  reset_counter=0)
 
-    with open('.crawled_data/fedlex/_overview_fedlex.pkl', 'wb') as con:
+    with open('./crawled_data/fedlex/_overview_fedlex.pkl', 'wb') as con:
         pickle.dump(scraper_fedlex.crawled_legal_knowledge, con)
