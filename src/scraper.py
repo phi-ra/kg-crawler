@@ -16,6 +16,7 @@ import urllib
 import re
 from bs4 import BeautifulSoup
 import lxml
+from selenium.common import NoSuchElementException
 
 from typing import Optional, Callable
 
@@ -532,7 +533,10 @@ class FedlexScraper:
         self.full_set = fetch_full_fedlex()
         self.crawled_legal_knowledge = {}
 
-    def _scrap_feldex(self, id_counter=0, reset_counter=0):
+    def _scrap_feldex(self,
+                      write_dir,
+                      id_counter=0,
+                      reset_counter=0):
         for legal_entry in self.full_set:
             # Set up feature to restart crawling if there is an error
             # use the reset counter if necessary
@@ -546,7 +550,11 @@ class FedlexScraper:
                                 web_string)
             web_string = web_string + '/de'
 
-            xml_url, in_force_status = isolate_legal_xml(web_string)
+            try:
+                xml_url, in_force_status, uri = isolate_legal_xml(web_string)
+            except NoSuchElementException:
+                id_counter += 1
+                continue
 
             crawl_object = requests.get(xml_url)
             soup = BeautifulSoup(crawl_object.content, 'xml')
@@ -566,7 +574,7 @@ class FedlexScraper:
             legal_entry['cited_in_article'] = articles_cited_in_current
 
             # save as pickle
-            with open(f'data/01_raw/01_all/legal/legal_doc_{id_counter}.pkl', 'wb') as con:
+            with open(f'{write_dir}/legal_doc_{id_counter}.pkl', 'wb') as con:
                 pickle.dump(soup, con)
             
             # add entry to knowledge base

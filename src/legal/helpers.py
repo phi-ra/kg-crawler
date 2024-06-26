@@ -147,4 +147,5 @@ def isolate_legal_xml(url, date=False):
             driver.close()
             return xml_link, legal_status, current_uri
     else: 
+        current_uri = driver.current_url
         return url, legal_status, current_uri
